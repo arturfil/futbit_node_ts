@@ -15,7 +15,9 @@ mongoose_1.default.connect('mongodb://localhost/soccerapp')
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // routes
+const users_1 = __importDefault(require("./routes/users"));
 // path declaration of routes
+app.use("/api/auth", users_1.default);
 // port declaration and execution
-const port = 5500;
+const port = 5000;
 app.listen(port, 'localhost', () => { console.log("Server Started ⚡️"); });
