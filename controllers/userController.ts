@@ -20,3 +20,17 @@ export const signUpUser = async(req: Request, res: Response) => {
     return res.status(500).json({message: "Couldn't create the user"});
   }
 }
+
+export const loginUser = async (req: Request, res: Response) => {
+  const { email, password} = req.body;
+  const user = await User.findOne({email});
+  if (!user) {
+    return res.status(500).json({message: "Please check credentials"});
+  }
+  const validPassword = bcrypt.compareSync(password, user.password);
+  if (!validPassword) {
+    return res.status(500).json({message: "Please check credentials"});
+  }
+  const token = await generateJwt(user._id);
+  return res.status(200).json({token, user})
+}

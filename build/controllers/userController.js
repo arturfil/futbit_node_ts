@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUpUser = void 0;
+exports.loginUser = exports.signUpUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const User_1 = __importDefault(require("../models/User"));
 const processJwt_1 = require("../helpers/processJwt");
@@ -34,3 +34,17 @@ const signUpUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.signUpUser = signUpUser;
+const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    const user = yield User_1.default.findOne({ email });
+    if (!user) {
+        return res.status(500).json({ message: "Please check credentials" });
+    }
+    const validPassword = bcrypt_1.default.compareSync(password, user.password);
+    if (!validPassword) {
+        return res.status(500).json({ message: "Please check credentials" });
+    }
+    const token = yield (0, processJwt_1.generateJwt)(user._id);
+    return res.status(200).json({ token, user });
+});
+exports.loginUser = loginUser;
