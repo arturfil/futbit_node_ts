@@ -20,8 +20,8 @@ const games_1 = __importDefault(require("./routes/games"));
 const fields_1 = __importDefault(require("./routes/fields"));
 // path declaration of routes
 app.use("/api/auth", users_1.default);
-app.use("/api/game", games_1.default);
-app.use("/api/fieldRoute", fields_1.default);
+app.use("/api/games", games_1.default);
+app.use("/api/fields", fields_1.default);
 // port declaration and execution
-const port = 5000;
-app.listen(port, 'localhost', () => { console.log("Server Started ⚡️"); });
+const port = 8000;
+app.listen(port, 'localhost', () => { console.log(`Server Started in port ⚡️`); });

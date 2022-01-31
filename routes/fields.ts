@@ -3,8 +3,8 @@ import { createField, deleteField, getAllFields, getFieldById } from '../control
 const router:Router = Router();
 
 router.get("/", getAllFields);
-router.get("/field/:id", getFieldById);
 router.post("/field", createField);
+router.get("/field/:id", getFieldById);
 router.delete("field/:id", deleteField);
 
 export default router;

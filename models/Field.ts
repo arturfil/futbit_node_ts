@@ -6,8 +6,8 @@ interface Field {
 }
 
 const FieldSchema = new Schema<Field>({
-  address: {type: String, required: true},
-  name: {type: String, required: true}
+  address: {type: String, required: true, unique: true},
+  name: {type: String, required: true, unique: true}
 })
 
 export default model<Field>('Field', FieldSchema)

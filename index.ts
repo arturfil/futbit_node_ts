@@ -21,9 +21,9 @@ import fieldRoute from './routes/fields'
 
 // path declaration of routes
 app.use("/api/auth", userRoute);
-app.use("/api/game", gameRoute);
-app.use("/api/fieldRoute", fieldRoute);
+app.use("/api/games", gameRoute);
+app.use("/api/fields", fieldRoute);
 
 // port declaration and execution
-const port:number =  5000;
-app.listen(port, 'localhost', () => {console.log("Server Started ⚡️")})
+const port:number =  8000;
+app.listen(port, 'localhost', () => {console.log(`Server Started in port ⚡️`)})
