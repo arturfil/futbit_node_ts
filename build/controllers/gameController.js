@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteGame = exports.updateGame = exports.createGame = exports.getSingleGame = exports.getAllGames = void 0;
+exports.deleteGame = exports.updateGame = exports.createGame = exports.getGameById = exports.getAllGames = void 0;
 const Game_1 = __importDefault(require("../models/Game"));
 const getAllGames = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const allGames = yield Game_1.default.find();
@@ -24,7 +24,7 @@ const getAllGames = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllGames = getAllGames;
-const getSingleGame = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getGameById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const singleGame = yield Game_1.default.findById(id);
     try {
@@ -34,7 +34,7 @@ const getSingleGame = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.status(500).json({ message: "Couldn't finda a game with that id" });
     }
 });
-exports.getSingleGame = getSingleGame;
+exports.getGameById = getGameById;
 const createGame = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const gameToCreate = yield Game_1.default.create(req.body);
     try {

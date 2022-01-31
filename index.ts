@@ -16,9 +16,13 @@ app.use(express.json());
 
 // routes
 import userRoute from './routes/users';
+import gameRoute from './routes/games';
+import fieldRoute from './routes/fields'
 
 // path declaration of routes
 app.use("/api/auth", userRoute);
+app.use("/api/game", gameRoute);
+app.use("/api/fieldRoute", fieldRoute);
 
 // port declaration and execution
 const port:number =  5000;

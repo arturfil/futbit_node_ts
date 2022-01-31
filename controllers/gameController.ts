@@ -10,7 +10,7 @@ export const getAllGames = async (req: Request, res: Response) => {
   }
 }
 
-export const getSingleGame = async (req: Request, res: Response) => {
+export const getGameById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const singleGame = await Game.findById(id);
   try {
