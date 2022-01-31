@@ -32,5 +32,5 @@ export const loginUser = async (req: Request, res: Response) => {
     return res.status(500).json({message: "Please check credentials"});
   }
   const token = await generateJwt(user._id);
-  return res.status(200).json({token, user})
+    return res.status(200).json({token, user})
 }
