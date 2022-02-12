@@ -17,10 +17,12 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // routes
 const auth_1 = __importDefault(require("./routes/auth"));
+const users_1 = __importDefault(require("./routes/users"));
 const games_1 = __importDefault(require("./routes/games"));
 const fields_1 = __importDefault(require("./routes/fields"));
 // path declaration of routes
 app.use("/api/auth", auth_1.default);
+app.use("/api/users", users_1.default);
 app.use("/api/games", games_1.default);
 app.use("/api/fields", fields_1.default);
 // port declaration and execution

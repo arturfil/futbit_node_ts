@@ -5,3 +5,5 @@ const router:Router = Router();
 router.get('/', getUsers)
 router.put('/user/:id', updateUser)
 router.delete('/user/:id', deleteUser);
+
+export default router;

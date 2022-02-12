@@ -18,11 +18,13 @@ app.use(express.json());
 
 // routes
 import authRoute from './routes/auth';
+import userRoute from './routes/users';
 import gameRoute from './routes/games';
 import fieldRoute from './routes/fields'
 
 // path declaration of routes
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute)
 app.use("/api/games", gameRoute);
 app.use("/api/fields", fieldRoute);
 
