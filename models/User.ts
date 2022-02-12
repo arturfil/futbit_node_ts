@@ -24,4 +24,9 @@ const UserSchema = new Schema<User>({
   nationality: { type: String},
 });
 
+UserSchema.methods.toJSON = function () {
+  const { password, __v, ...user} = this.toObject();
+  return user;
+}
+
 export default model<User>('User', UserSchema);
