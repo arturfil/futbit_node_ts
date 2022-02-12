@@ -9,10 +9,10 @@ export interface Rating extends Document {
     gamesWon: number;
     manOfTheMatch: number;
     attitude: number;
-    involment: number;
+    involvement: number;
 }
 
-const RatingSchema = new Schema({
+const RatingSchema = new Schema<Rating>({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     attendance: {type: Number},
     gamesPlayed: {type: Number},

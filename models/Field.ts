@@ -5,7 +5,7 @@ export interface Field extends Document {
   name: string;
 }
 
-const FieldSchema = new Schema({
+const FieldSchema = new Schema<Field>({
   address: {type: String, required: true, unique: true},
   name: {type: String, required: true, unique: true}
 })
