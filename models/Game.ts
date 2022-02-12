@@ -1,20 +1,20 @@
 import { Schema, model } from 'mongoose';
-import Field from './Field';
-import User from './User';
+import { Field } from './Field';
+import { User } from './User';
 
 interface Game {
-  place: typeof Field;
+  field: Field['_id']
   time: string;
   date: Date;
-  player: typeof User;
+  player: User['_id'];
 
 }
 
 const GameSchema = new Schema<Game>({
-  place: { type: Schema.Types.ObjectId, required: true},
+  field: { type: Schema.Types.ObjectId, required: true, ref: 'Field'},
   time: { type: String, required: true},
   date: {type: Date, required: true},
-  player : { type: Schema.Types.ObjectId, required: true},
+  player: { type: Schema.Types.ObjectId, required: true, ref: 'User'},
 })
 
 export default model<Game>('Game', GameSchema);

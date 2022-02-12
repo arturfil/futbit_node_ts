@@ -1,11 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
-interface Field {
+export interface Field extends Document {
   address: string;
   name: string;
 }
 
-const FieldSchema = new Schema<Field>({
+const FieldSchema = new Schema({
   address: {type: String, required: true, unique: true},
   name: {type: String, required: true, unique: true}
 })
