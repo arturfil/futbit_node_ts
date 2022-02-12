@@ -9,7 +9,8 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
-mongoose_1.default.connect('mongodb://localhost/soccerapp')
+const dbString = process.env.MONGODB_URL;
+mongoose_1.default.connect(dbString)
     .then(() => console.log("Connected to db 🔌"))
     .catch(() => console.log("Failed to connect to db ❌"));
 app.use((0, cors_1.default)());
@@ -23,5 +24,5 @@ app.use("/api/auth", users_1.default);
 app.use("/api/games", games_1.default);
 app.use("/api/fields", fields_1.default);
 // port declaration and execution
-const port = 8000;
-app.listen(port, 'localhost', () => { console.log(`Server Started in port ⚡️`); });
+const port = process.env.PORT || 8000;
+app.listen(port, () => { console.log(`Server Started in port ⚡️`); });

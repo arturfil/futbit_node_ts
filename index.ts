@@ -7,7 +7,9 @@ const app:Application = express();
 
 dotenv.config();
 
-mongoose.connect('mongodb://localhost/soccerapp')
+const dbString:string|undefined = process.env.MONGODB_URL;
+
+mongoose.connect(dbString!)
   .then(() => console.log("Connected to db 🔌"))
   .catch(() => console.log("Failed to connect to db ❌"))
 
@@ -25,5 +27,5 @@ app.use("/api/games", gameRoute);
 app.use("/api/fields", fieldRoute);
 
 // port declaration and execution
-const port:number =  8000;
-app.listen(port, 'localhost', () => {console.log(`Server Started in port ⚡️`)})
+const port:string|number =  process.env.PORT || 8000;
+app.listen(port, () => {console.log(`Server Started in port ⚡️`)})
