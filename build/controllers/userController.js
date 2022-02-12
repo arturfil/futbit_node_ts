@@ -12,39 +12,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = exports.signUpUser = void 0;
-const bcrypt_1 = __importDefault(require("bcrypt"));
+exports.deleteUser = exports.updateUser = exports.getUsers = void 0;
 const User_1 = __importDefault(require("../models/User"));
-const processJwt_1 = require("../helpers/processJwt");
-const signUpUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
-    const testEmail = yield User_1.default.findOne({ email });
-    if (testEmail)
-        return res.status(500).json({ message: "Couldn't create user" });
-    const user = new User_1.default(req.body);
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield User_1.default.find();
     try {
-        const salt = bcrypt_1.default.genSaltSync();
-        user.password = bcrypt_1.default.hashSync(password, salt);
-        user.save();
-        const token = yield (0, processJwt_1.generateJwt)(user._id);
-        return res.status(201).json({ user, token });
+        return res.status(200).json(users);
     }
     catch (error) {
-        return res.status(500).json({ message: "Couldn't create the user" });
+        return res.status(500).json({ error: "Couldn't get the users" });
     }
 });
-exports.signUpUser = signUpUser;
-const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
-    const user = yield User_1.default.findOne({ email });
-    if (!user) {
-        return res.status(500).json({ message: "Please check credentials" });
+exports.getUsers = getUsers;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const userToUpdate = yield User_1.default.findByIdAndUpdate(id, req.body, { new: true });
+    try {
+        return res.status(202).json(userToUpdate);
     }
-    const validPassword = bcrypt_1.default.compareSync(password, user.password);
-    if (!validPassword) {
-        return res.status(500).json({ message: "Please check credentials" });
+    catch (error) {
+        return res.status(500).json({ error: "Couldn't update the user" });
     }
-    const token = yield (0, processJwt_1.generateJwt)(user._id);
-    return res.status(200).json({ token, user });
 });
-exports.loginUser = loginUser;
+exports.updateUser = updateUser;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    yield User_1.default.findByIdAndDelete(id);
+    try {
+        return res.status(203).json({ message: "User deleted successfuly" });
+    }
+    catch (error) {
+        return res.status(500).json({ error: "Couldn't delete user" });
+    }
+});
+exports.deleteUser = deleteUser;

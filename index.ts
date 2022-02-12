@@ -17,12 +17,12 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-import userRoute from './routes/users';
+import authRoute from './routes/auth';
 import gameRoute from './routes/games';
 import fieldRoute from './routes/fields'
 
 // path declaration of routes
-app.use("/api/auth", userRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/games", gameRoute);
 app.use("/api/fields", fieldRoute);
 
