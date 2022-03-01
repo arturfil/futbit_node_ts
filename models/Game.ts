@@ -1,12 +1,12 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 import { Field } from "./Field";
 import { User } from "./User";
 
 interface Game {
-  field: Field["_id"];
+  field: Types.ObjectId;
   time: string;
   date: Date;
-  player: User["_id"];
+  player: Types.ObjectId;
 }
 
 const GameSchema = new Schema<Game>({

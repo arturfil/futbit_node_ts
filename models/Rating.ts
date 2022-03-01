@@ -1,8 +1,8 @@
-import { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 import { User } from './User';
 
-export interface Rating extends Document {
-    user: User['_id']
+export interface Rating {
+    user: Types.ObjectId
     attendance: number;
     goals: number;
     gamesPlayed: number;

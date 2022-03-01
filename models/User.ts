@@ -1,14 +1,14 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 import { Rating } from "./Rating";
 
 // An interface is needed that way you know
 // How is the model suposed to look
-export interface User extends Document {
+export interface User {
   name: string;
   email: string;
   password: string;
   type: string;
-  rating: Rating['_id'];
+  rating: Types.ObjectId;
   age: number;
   nationality: string;
 }

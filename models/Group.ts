@@ -1,8 +1,8 @@
-import { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 import { User } from './User';
 
-export interface Group extends Document {
-    player: User['_id']
+export interface Group {
+    player: Types.ObjectId;
 }
 
 const GroupSchema = new Schema<Group>({
